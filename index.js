@@ -25,8 +25,8 @@ const showAllAi=(data,dataLimit)=>{
     data.forEach(allAi =>{
         // console.log(allAi);
         const {image,features,published_in,name,id}= allAi;
+         
         const div = document.createElement('div');
-
         div.classList.add('card-body');
         div.innerHTML=`
     <figure><img src="${image}"/></figure>
@@ -40,9 +40,9 @@ const showAllAi=(data,dataLimit)=>{
          <h2 class="card-title text-2xl mb-3">${name}</h2>
         <i class="fa-sharp fa-regular fa-calendar-days text-sm">${'  '+published_in}</i>
         </div>
-        <div class="mt-5">
+        <div class="mt-5 ">
         
-        <label for="my-modal-3" ><i onclick="aiDetails('${id}')" for="my-modal-3" class="fa-solid fa-arrow-right"></i></label>
+        <label  class="arrow-button" for="my-modal-3" ><i onclick="aiDetails('${id}')" for="my-modal-3" class="fa-solid fa-arrow-right"></i></label>
         </div>
         </div>
         `
@@ -73,21 +73,21 @@ const aiDetails =id=>{
     fetch(URL)
     .then(res=>res.json())
     .then(data=>{
-        console.log(data)
+        // console.log(data)
         displaySingleAiDetails(data.data)
     });
 }
 // display modal
 const displaySingleAiDetails=(singleAi)=>{
-    console.log(singleAi);
+    // console.log(singleAi);
     const {description,pricing,features,integrations,input_output_examples,image_link,accuracy} =singleAi;
-
+ 
     const modalInfo = document.getElementById('modal');
    const modalDetails=`
    
-      <div style="width:100%;" class="modal-box relative">
+      <div class="modal-box relative">
         <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-        <div  class="flex p-5 m-5 py-5 gap-10 ">
+        <div  class="flex p-5 m-5 py-5 gap-10 modal-width">
         <div class="bg-red-50 py-5 px-5">
     
             <h1 class="font-bold text-2xl">${description}</h1>
@@ -107,7 +107,6 @@ const displaySingleAiDetails=(singleAi)=>{
                 <div>
                     <h1 class="text-2xl font-bold mb-5 mt-5">Integrations</h1>
                     <ul id="integration-container"></ul>
-               
                  
                 </div>
             </div>
@@ -118,7 +117,6 @@ const displaySingleAiDetails=(singleAi)=>{
           <img  src="${image_link?image_link[0]:"no image found"}" class="rounded-xl"/>
           <div id="badge" class="badge badge-secondary hidden">${accuracy.score*100}%accuracy</div>
           
-
         </figure>
         <div class="card-body items-center text-center">
         <h1 class="text-xl font-semibold ">${input_output_examples?input_output_examples[0].input:"Can you give any example?"}</h1>
@@ -159,15 +157,10 @@ if(integrations === null){
 const feautureContainer = document.getElementById('features-container');
 
 for(const key in features){
-    console.log(key,features[key].feature_name);
+    // console.log(key,features[key].feature_name);
     feautureContainer.innerHTML +=`<li>${key,features[key].feature_name}</li>`
 }
 
-
-
-
 }
-
-
 loadAllAi(6);
 

@@ -24,6 +24,12 @@ color: #03A30A;
     top: -70px;
 }
 
-#modal{
+.modal-width{
     width: 100% !important;
+}
+.arrow-button{
+
+background: #ddaeae;
+border-radius: 10px;
+
 }
